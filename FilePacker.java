@@ -21,7 +21,7 @@ public class FilePacker // class should be complete to give access
     
     public static void main(String are[]) throws Exception
     { // created object of class which is used to access all the method from class
-        FilePacker obj = new FilePacker("C:/Marvellous/JAVA/PackerUnpacker/Demo" /*absolute path */ ,"combine.txt"); // packed output will go in combine.txt file
+        FilePacker obj = new FilePacker("C:JAVA/PackerUnpacker/Demo" /*absolute path */ ,"combine.txt"); // packed output will go in combine.txt file
     }
     public FilePacker(String src, String Dest) throws Exception // constructor
     {
