@@ -55,6 +55,7 @@ public class FileUnacker
         
         catch(Exception e){
             System.out.println(e);
+            System.out.println("Something went wrong");
         }
     }
 }
