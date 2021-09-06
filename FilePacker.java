@@ -48,7 +48,7 @@ public class FilePacker // class should be complete to give access
                                   try
                                   {
                                       String name = filePath.getFileName().toString();
-									  // with getFileName will get abc.txt from the path "C:/Marvellous/PackerUnpacker/Demo/abc.txt"  
+									  // with getFileName will get abc.txt from the path "C:/PackerUnpacker/Demo/abc.txt"  
                                       String ext = name.substring(name.lastIndexOf(".")); // .txt is substring of string(after . whatever)
                                       List<String> list = Arrays.asList(ValidExt); // array ValidExt is created at line no.20
 									  if(list.contains(ext)) // this will iterate for all files from path
