@@ -13,18 +13,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class FilePacker // class should be complete to give access 
-{
+public class FilePacker{ // class should be complete to give access
     // characteristics of class
     FileOutputStream outstream = null; // can use anywhere 
     String ValidExt[] = {".txt",".c",".java",".cpp"}; // valid extensions
     
-    public static void main(String are[]) throws Exception
-    { // created object of class which is used to access all the method from class
+    public static void main(String are[]) throws Exception{ // created object of class which is used to access all the method from class
         FilePacker obj = new FilePacker("C:JAVA/PackerUnpacker/Demo" /*absolute path */ ,"combine.txt"); // packed output will go in combine.txt file
     }
-    public FilePacker(String src, String Dest) throws Exception // constructor
-    {
+    public FilePacker(String src, String Dest) throws Exception{ // constructor
     System.out.println(src +" "+ Dest); // paraemters 
     File outfile =new File(Dest); // file is inbuilt class of java.io.File //  new file will create here with combine.txt
     File infile = null;   //to read file , which is set to null
@@ -37,45 +34,39 @@ public class FilePacker // class should be complete to give access
         listAllFiles(src); //to travel the directory(demo)
     }
     
-    public void listAllFiles(String path) // directory name // demo
-    {
-        try(Stream<Path> paths = Files.walk(Paths.get(path))) // coded try block/ inline try block(with circular brackets) // exception prone syntax(can generate exception)
-        {   // created stream(sequence of byte) of path. // path is demo directory // walk:
-            paths.forEach(filePath -> 
-                          {
-                              if (Files.isRegularFile(filePath)) // check file is regular or not// isRegularFile give true or flase return value
-                              {   // if true it will go in if condition
-                                  try
-                                  {
+    public void listAllFiles(String path){ // directory name // demo
+        try(Stream<Path> paths = Files.walk(Paths.get(path))){// coded try block/ inline try block(with circular brackets) // exception prone syntax(can generate exception)
+           // created stream(sequence of byte) of path. // path is demo directory //walk: use to go from one directory to another directory
+            paths.forEach(filePath ->{
+                              if (Files.isRegularFile(filePath)){ // check file is regular or not// isRegularFile give true or flase return value
+                                 // if true it will go in if condition
+                                  try{
                                       String name = filePath.getFileName().toString();
 									  // with getFileName will get abc.txt from the path "C:/PackerUnpacker/Demo/abc.txt"  
                                       String ext = name.substring(name.lastIndexOf(".")); // .txt is substring of string(after . whatever)
-                                      List<String> list = Arrays.asList(ValidExt); // array ValidExt is created at line no.20
-									  if(list.contains(ext)) // this will iterate for all files from path
-                                      {
+                                      List<String> list = Arrays.asList(ValidExt); // array ValidExt is created at line no.19
+				      if(list.contains(ext)){ // this will iterate for all files from path
+                                      
                                           File file=new File(filePath.getFileName().toString()); // created object of new file and open that file to travel
                                           
                                           Pack(file.getAbsolutePath()); // get absolute path of that file, it will go to the function "pack"
                                       }
                                   }
-                                  catch (Exception e)
-                                  {
+                                  catch (Exception e){
                                               System.out.println(e);
                                   }
                               }
                           });
         }
-        catch(IOException e)
-        {
+        catch(IOException e){
             System.out.println(e);
         }
     }
-    public void Pack(String filePath) // sending path of one file at a time, e.g "abc.txt"
-    {
+    public void Pack(String filePath){ // sending path of one file at a time, e.g "abc.txt"
+    
         FileInputStream instream = null; //to read the data from file , used reference instream which is declared st line no. 19
 		//file handling is part of checked exception when you read or write the data from or in fileit may generate exception so we shouldd handle it with try catch 
-        try
-        {
+        try{
             byte[] buffer = new byte[1024]; // character and byte are two d.t. character is of 2 bytes, because java supports unicode //
             int length;
             byte temp[] = new byte[100]; // header of array 
@@ -90,15 +81,13 @@ public class FilePacker // class should be complete to give access
             instream = new FileInputStream(filePath);
             outstream.write(temp, 0, temp.length); // here we write header which is of 100 bytes
             
-            while ((length = instream.read(buffer)) > 0)
-            {
+            while ((length = instream.read(buffer)) > 0){
                 outstream.write(buffer, 0, length); // here we write data of file
             }
-        
+
             instream.close();
         }
-        catch(Exception e)
-        {
+        catch(Exception e){
             System.out.println(e);
         }
     }
