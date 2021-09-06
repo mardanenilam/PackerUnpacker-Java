@@ -22,7 +22,7 @@ public class FilePacker{ // class should be complete to give access
         FilePacker obj = new FilePacker("C:JAVA/PackerUnpacker/Demo" /*absolute path */ ,"combine.txt"); // packed output will go in combine.txt file
     }
     public FilePacker(String src, String Dest) throws Exception{ // constructor
-    System.out.println(src +" "+ Dest); // paraemters 
+    //System.out.println(src +" "+ Dest); // paraemters 
     File outfile =new File(Dest); // file is inbuilt class of java.io.File //  new file will create here with combine.txt
     File infile = null;   //to read file , which is set to null
     outstream = new FileOutputStream(Dest); // to write in file.. dest object is passed , reference is created on line number 19. 
@@ -67,22 +67,22 @@ public class FilePacker{ // class should be complete to give access
         FileInputStream instream = null; //to read the data from file , used reference instream which is declared st line no. 19
 		//file handling is part of checked exception when you read or write the data from or in fileit may generate exception so we shouldd handle it with try catch 
         try{
-            byte[] buffer = new byte[1024]; // character and byte are two d.t. character is of 2 bytes, because java supports unicode //
+            byte[] buffer = new byte[1024]; // character and byte are two d.t.// character is of 2 bytes, because java supports unicode//The object streams use an internal 1024-byte buffer
             int length;
-            byte temp[] = new byte[100]; // header of array 
+            byte temp[] = new byte[100]; // header array of 100 bytes // fixed size
             
             File fobj = new File(filePath); // path abc.txt // size 10 byte 
             String Header = filePath+" "+fobj.length(); // file path , space , length of file
             for (int i = Header.length(); i < 100; i++) // this loop will interate 90 times if you have data of size 10 
-                Header += " ";  // when we want uppack these files, we can use space " " as a delimiter 
+                Header += " ";  // when we want unpack these files, we can use space " " as a delimiter 
             
-            temp = Header.getBytes(); //string converted into byte 
+            temp = Header.getBytes(); //string converted into byte // because we are maintaining same data type
             
             instream = new FileInputStream(filePath);
-            outstream.write(temp, 0, temp.length); // here we write header which is of 100 bytes
+            outstream.write(temp, 0, temp.length); // here we write header which is of 100 bytes// outstream is characteristic
             
             while ((length = instream.read(buffer)) > 0){
-                outstream.write(buffer, 0, length); // here we write data of file
+                outstream.write(buffer, 0, length); // here we write data of file 
             }
 
             instream.close();
